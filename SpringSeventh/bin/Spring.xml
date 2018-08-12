@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans>
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" 
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:jee="http://www.springframework.org/schema/jee" 
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd 
+
+         http://www.springframework.org/schema/jee 
+         http://www.springframework.org/schema/jee/spring-jee-3.2.xsd 
+
+         http://www.springframework.org/schema/util 
+         http://www.springframework.org/schema/util/spring-util-3.2.xsd"> -->
+<bean id="triangle" class="com.SpringSeventh.Triangle" autowire="byName">
+<property name="pointA" ref="center"/>
+<property name="pointB" ref="PointB"/>
+<property name="pointC" ref="PointC"/>
+</bean>
+
+<!-- <bean id="PointA" class="com.SpringSeventh.Point"> -->
+<bean id="center" class="com.SpringSeventh.Point">
+<!-- <qualifier value="circleRelated"/> -->
+<property name="x" value="${pointA.pointX}"/>
+<property name="y" value="${pointA.pointY}"/>
+</bean>
+
+<bean id="PointB" class="com.SpringSeventh.Point">
+<property name="x" value="-20"/>
+<property name="y" value="0"/>
+</bean>
+
+<bean id="PointC" class="com.SpringSeventh.Point">
+<property name="x" value="0"/>
+<property name="y" value="20"/>
+</bean>
+
+<bean class="com.SpringSeventh.MyBeanFactoryPostProcessor"/>
+
+<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<property name="locations" value="PointsConfig.properties"/>
+
+</bean>
+
+<bean id="circle" class="com.SpringSeventh.Circle">
+<property name="center" ref="center"/>
+</bean>
+<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"/>
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+<bean id="eclipse" class="com.SpringSeventh.Eclipse">
+<property name="center1" ref="PointB"/>
+<property name="center2" ref="PointC"/>
+</bean>
+
+<!-- <bean class="javax.annotation.PostConstruct"/>
+<bean class="javax.annotation.PreDestroy"/>
+<bean class="javax.annotation.Resource"/>
+ -->
+ 
+</beans>
